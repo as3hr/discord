@@ -1,3 +1,4 @@
+import 'package:discord/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:discord/routing/route_name.dart';
 
@@ -17,7 +18,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const SplashScreen());
 
     case RouteName.profile:
-      return MaterialPageRoute(builder: (context) => const SplashScreen());
+      return MaterialPageRoute(builder: (context) => const ProfileScreen());
 
     case RouteName.notification:
       return MaterialPageRoute(builder: (context) => const SplashScreen());

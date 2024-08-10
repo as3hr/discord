@@ -13,6 +13,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginCubit = BlocProvider.of<LoginCubit>(context);
+    loginCubit.navigation.context = context;
     return Scaffold(
       backgroundColor: AppColor.black5,
       body: BlocBuilder<LoginCubit, LoginState>(

@@ -10,8 +10,8 @@ class AppService {
     initialize();
   }
   void initialize() {
-    getIt.registerSingleton<LoginRepository>(FirebaseLoginRepository());
     getIt.registerSingleton<AppNavigation>(AppNavigation());
+    getIt.registerSingleton<LoginRepository>(FirebaseLoginRepository());
     getIt.registerSingleton<LoginNavigator>(LoginNavigator(getIt()));
   }
 }

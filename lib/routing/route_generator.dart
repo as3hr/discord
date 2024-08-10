@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:discord/routing/route_name.dart';
 
-import '../screens/auth/login_screen.dart';
+import '../screens/auth/login/login_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../routing/app_navigation.dart';
 import '../../routing/route_name.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,11 +14,15 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2),
-        () => AppNavigation.pushReplacement(RouteName.login));
+        () => Navigator.pushNamed(context, RouteName.login));
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Scaffold(
+      body: Center(
+        child: Text('THIS IS SPLASH SCREEN'),
+      ),
+    );
   }
 }

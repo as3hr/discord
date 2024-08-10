@@ -1,22 +1,34 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:discord/helpers/extensions.dart';
 import 'package:discord/helpers/styles/app_theme.dart';
+import 'package:discord/service/app_provider.dart';
+import 'package:discord/service/app_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:discord/firebase_options.dart';
 import 'package:discord/routing/app_navigation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import 'routing/route_generator.dart';
 
+late final FirebaseAuth auth;
+late final FirebaseApp app;
+final getIt = GetIt.instance;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+  app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  auth = FirebaseAuth.instanceFor(app: app);
   final themeMode = await AdaptiveTheme.getThemeMode();
-  runApp(Discord(themMode: themeMode));
+  AppService(getIt);
+  runApp(MultiBlocProvider(
+      providers: AppProvider.providers, child: Discord(themMode: themeMode)));
 }
 
 class Discord extends StatelessWidget {

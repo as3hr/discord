@@ -4,6 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppProvider {
   static final providers = [
-    BlocProvider(create: (context) => LoginCubit(getIt(), getIt())),
+    BlocProvider(create: (context) => LoginCubit(getIt(), getIt(), getIt())),
   ];
 }

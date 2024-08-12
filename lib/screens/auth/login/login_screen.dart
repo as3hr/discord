@@ -19,39 +19,44 @@ class LoginScreen extends StatelessWidget {
       body: BlocBuilder<LoginCubit, LoginState>(
           bloc: loginCubit,
           builder: (context, state) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InputField(
-                  onChanged: (val) {
-                    state.email = val;
-                  },
-                  hintText: 'Email',
-                ),
-                InputField(
-                  onChanged: (val) {
-                    state.password = val;
-                  },
-                  hintText: 'Password',
-                ),
-                const Gap(30),
-                GestureDetector(
-                  onTap: () => loginCubit.login(state.email, state.password),
-                  child: Container(
-                    color: AppColor.white,
-                    width: 170,
-                    padding: const EdgeInsets.all(10),
-                    child: Center(
-                        child: Text(
-                      'GET IN!',
-                      style: Styles.boldStyle(
-                          fontSize: 20, color: AppColor.black3),
-                    )),
-                  ),
-                ),
-              ],
-            );
+            return state.isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      InputField(
+                        onChanged: (val) {
+                          state.email = val;
+                        },
+                        hintText: 'Email',
+                      ),
+                      InputField(
+                        onChanged: (val) {
+                          state.password = val;
+                        },
+                        hintText: 'Password',
+                      ),
+                      const Gap(30),
+                      GestureDetector(
+                        onTap: () =>
+                            loginCubit.login(state.email, state.password),
+                        child: Container(
+                          color: AppColor.white,
+                          width: 170,
+                          padding: const EdgeInsets.all(10),
+                          child: Center(
+                              child: Text(
+                            'GET IN!',
+                            style: Styles.boldStyle(
+                                fontSize: 20, color: AppColor.black3),
+                          )),
+                        ),
+                      ),
+                    ],
+                  );
           }),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:discord/routing/route_name.dart';
 
 import '../screens/auth/login/login_screen.dart';
+import '../screens/home/home_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -19,6 +20,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case RouteName.profile:
       return MaterialPageRoute(builder: (context) => const ProfileScreen());
+
+    case RouteName.home:
+      return MaterialPageRoute(builder: (context) => const HomeScreen());
 
     case RouteName.notification:
       return MaterialPageRoute(builder: (context) => const SplashScreen());

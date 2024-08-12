@@ -1,6 +1,6 @@
+import 'package:discord/screens/splash/splash_cubit.dart';
 import 'package:flutter/material.dart';
-
-import '../../routing/route_name.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,8 +13,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2),
-        () => Navigator.pushNamed(context, RouteName.login));
+    final cubit = BlocProvider.of<SplashCubit>(context);
+    cubit.navigator.context = context;
+    cubit.onInit();
   }
 
   @override

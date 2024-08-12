@@ -1,9 +1,9 @@
 import 'package:discord/routing/app_navigation.dart';
 import 'package:discord/routing/route_name.dart';
-import 'package:discord/screens/profile/profile_navigator.dart';
+import 'package:discord/screens/home/home_navigator.dart';
 import 'package:flutter/material.dart';
 
-class LoginNavigator with ProfileRoute {
+class LoginNavigator with HomeRoute {
   @override
   final AppNavigation navigation;
   @override

@@ -1,15 +1,21 @@
 // ignore_for_file: avoid_print
 
+import 'package:discord/helpers/widgets/indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 //loader
-Future<void> showLoder(BuildContext context, Future Function() call) async {
+Future<void> showLoder(BuildContext context, Future Function() func) async {
   try {
-    context.loaderOverlay.show();
+    context.loaderOverlay.show(widgetBuilder: (_) => const Indicator());
+    await func.call();
   } catch (error) {
     print('CAUGHT IN E: $error');
-  } finally {}
+  } finally {
+    if (context.mounted) {
+      context.loaderOverlay.hide();
+    }
+  }
 }
 
 void showToast() {}

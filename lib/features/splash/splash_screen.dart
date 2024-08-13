@@ -1,4 +1,4 @@
-import 'package:discord/screens/splash/splash_cubit.dart';
+import 'package:discord/features/splash/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

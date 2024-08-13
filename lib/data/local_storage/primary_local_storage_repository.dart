@@ -27,4 +27,15 @@ class PrimaryLocalStorageRepository implements LocalStorageRepository {
       return left(LocalStorageFailure(error: error.toString()));
     }
   }
+
+  @override
+  Future<Either<LocalStorageFailure, bool>> deleteUser(String key) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove(key);
+      return right(true);
+    } catch (error) {
+      return left(LocalStorageFailure(error: error.toString()));
+    }
+  }
 }

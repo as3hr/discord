@@ -1,8 +1,8 @@
 import 'package:discord/helpers/styles/app_colors.dart';
 import 'package:discord/helpers/styles/styles.dart';
 import 'package:discord/helpers/widgets/input_field.dart';
-import 'package:discord/screens/auth/login/login_cubit.dart';
-import 'package:discord/screens/auth/login/login_state.dart';
+import 'package:discord/features/auth/login/login_cubit.dart';
+import 'package:discord/features/auth/login/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';

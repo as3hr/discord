@@ -19,10 +19,13 @@ class FirebaseLoginRepository implements LoginRepository {
       final response = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (response.user?.email?.isNotEmpty == true) {
-        final firebaseUser =
-            await FirebaseFirestore.instance.collection('users').doc('1').get();
-        if (firebaseUser.exists) {
-          final user = UserJson.fromData(firebaseUser.data() ?? {}).toDomain();
+        final firebaseUser = await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: email)
+            .get();
+        if (firebaseUser.docs.first.exists) {
+          final user =
+              UserJson.fromData(firebaseUser.docs.first.data()).toDomain();
           _userStore.setUser(user);
           return right(user);
         } else {

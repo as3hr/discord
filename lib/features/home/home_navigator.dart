@@ -1,5 +1,5 @@
-import 'package:discord/routing/app_navigation.dart';
-import 'package:discord/routing/route_name.dart';
+import 'package:discord/navigation/app_navigation.dart';
+import 'package:discord/navigation/route_name.dart';
 import 'package:flutter/widgets.dart';
 
 class HomeNavigator {}

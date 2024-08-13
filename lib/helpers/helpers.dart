@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:discord/helpers/widgets/indicator.dart';
-import 'package:discord/routing/app_navigation.dart';
+import 'package:discord/navigation/app_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 

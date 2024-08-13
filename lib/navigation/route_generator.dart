@@ -1,10 +1,10 @@
-import 'package:discord/screens/profile/profile_screen.dart';
+import 'package:discord/features/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:discord/routing/route_name.dart';
+import 'package:discord/navigation/route_name.dart';
 
-import '../screens/auth/login/login_screen.dart';
-import '../screens/home/home_screen.dart';
-import '../screens/splash/splash_screen.dart';
+import '../features/auth/login/login_screen.dart';
+import '../features/home/home_screen.dart';
+import '../features/splash/splash_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   // final args = settings.arguments as Map<String, dynamic>;

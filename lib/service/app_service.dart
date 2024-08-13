@@ -3,9 +3,9 @@ import 'package:discord/data/login/firebase_login_repository.dart';
 import 'package:discord/domain/repositories/local_storage_repository.dart';
 import 'package:discord/domain/repositories/login_repository.dart';
 import 'package:discord/domain/stores/user_store.dart';
-import 'package:discord/routing/app_navigation.dart';
-import 'package:discord/screens/auth/login/login_navigator.dart';
-import 'package:discord/screens/splash/splash_navigator.dart';
+import 'package:discord/navigation/app_navigation.dart';
+import 'package:discord/features/auth/login/login_navigator.dart';
+import 'package:discord/features/splash/splash_navigator.dart';
 import 'package:get_it/get_it.dart';
 
 class AppService {

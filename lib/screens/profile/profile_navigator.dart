@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ProfileNavigator {}
 
 mixin ProfileRoute {
-  goToProfile() => navigation.push(context, RouteName.profile);
+  void goToProfile() => navigation.push(context, RouteName.profile);
   AppNavigation get navigation;
   BuildContext get context;
 }

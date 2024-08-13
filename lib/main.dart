@@ -1,9 +1,9 @@
+import 'package:discord/service/app_provider.dart';
+import 'package:discord/service/app_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:discord/helpers/extensions.dart';
 import 'package:discord/helpers/styles/app_theme.dart';
-import 'package:discord/service/app_provider.dart';
-import 'package:discord/service/app_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:discord/firebase_options.dart';
@@ -42,6 +42,7 @@ class Discord extends StatelessWidget {
       dark: AppTheme.theme(dark: true),
       builder: (light, dark) {
         return GlobalLoaderOverlay(
+          overlayColor: Colors.transparent,
           child: ScreenUtilInit(
               designSize: Size(context.screenWidth, context.screenHeight),
               builder: (context, _) {

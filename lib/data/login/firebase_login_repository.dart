@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:discord/domain/entities/user_entity.dart';
 import 'package:discord/domain/failures/login_failure.dart';
 import 'package:discord/domain/repositories/login_repository.dart';
+import 'package:discord/domain/stores/user_store.dart';
 import 'package:discord/main.dart';
+import 'package:discord/model/user_json.dart';
 
 class FirebaseLoginRepository implements LoginRepository {
+  final UserStore _userStore;
+  FirebaseLoginRepository(this._userStore);
   @override
   Future<Either<LoginFailure, UserEntity>> login(
     String email,
@@ -14,8 +19,15 @@ class FirebaseLoginRepository implements LoginRepository {
       final response = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (response.user?.email?.isNotEmpty == true) {
-        return right(UserEntity(
-            email: response.user!.email, name: response.user?.displayName));
+        final firebaseUser =
+            await FirebaseFirestore.instance.collection('users').doc('1').get();
+        if (firebaseUser.exists) {
+          final user = UserJson.fromData(firebaseUser.data() ?? {}).toDomain();
+          _userStore.setUser(user);
+          return right(user);
+        } else {
+          return left(LoginFailure(error: 'This user does not exist!'));
+        }
       } else {
         return left(LoginFailure(error: 'Unable to login due to some error!'));
       }

@@ -1,7 +1,11 @@
+import 'package:discord/data/local_storage/primary_local_storage_repository.dart';
 import 'package:discord/data/login/firebase_login_repository.dart';
+import 'package:discord/domain/repositories/local_storage_repository.dart';
 import 'package:discord/domain/repositories/login_repository.dart';
+import 'package:discord/domain/stores/user_store.dart';
 import 'package:discord/routing/app_navigation.dart';
 import 'package:discord/screens/auth/login/login_navigator.dart';
+import 'package:discord/screens/splash/splash_navigator.dart';
 import 'package:get_it/get_it.dart';
 
 class AppService {
@@ -11,7 +15,12 @@ class AppService {
   }
   void initialize() {
     getIt.registerSingleton<AppNavigation>(AppNavigation());
-    getIt.registerSingleton<LoginRepository>(FirebaseLoginRepository());
+    getIt.registerSingleton<LocalStorageRepository>(
+      PrimaryLocalStorageRepository(),
+    );
+    getIt.registerSingleton<UserStore>(UserStore());
+    getIt.registerSingleton<LoginRepository>(FirebaseLoginRepository(getIt()));
     getIt.registerSingleton<LoginNavigator>(LoginNavigator(getIt()));
+    getIt.registerSingleton<SplashNavigator>(SplashNavigator(getIt()));
   }
 }

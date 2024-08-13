@@ -4,15 +4,15 @@ import 'package:discord/screens/home/home_navigator.dart';
 import 'package:flutter/material.dart';
 
 class LoginNavigator with HomeRoute {
+  LoginNavigator(this.navigation);
   @override
   final AppNavigation navigation;
   @override
   late BuildContext context;
-  LoginNavigator(this.navigation);
 }
 
 mixin LoginRoute {
-  goToLogin() {
+  void goToLogin() {
     navigation.push(context, RouteName.login);
   }
 

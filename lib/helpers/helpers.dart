@@ -1,24 +1,80 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:discord/helpers/widgets/indicator.dart';
+import 'package:discord/routing/app_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-//loader
-Future<void> showLoder(BuildContext context, Future Function() func) async {
+Future<void> loader(Future<void> func, BuildContext context) async {
   try {
     context.loaderOverlay.show(widgetBuilder: (_) => const Indicator());
-    await func.call();
+    await func;
   } catch (error) {
-    print('CAUGHT IN E: $error');
+    print('CAUGHT ERROR: $error');
+    showToast(error.toString(), context);
   } finally {
-    if (context.mounted) {
-      context.loaderOverlay.hide();
+    if (context.mounted == true) {
+      Future.delayed(const Duration(seconds: 1), () {
+        context.loaderOverlay.hide();
+      });
     }
   }
 }
 
-void showToast() {}
+Future<void> showToast(String message, BuildContext context) async {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) {
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.of(context).pop(true);
+      });
+
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+Future<bool> showConfirmationDialog(String title) async {
+  final context = AppNavigation.globalKey.currentContext!;
+  return await showDialog<bool>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(title),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Yes'),
+              ),
+            ],
+          );
+        },
+      ) ??
+      false;
+}
 
 //date functions
 String formatDate(DateTime date) {

@@ -1,4 +1,4 @@
-import 'package:discord/service/app_provider.dart';
+import 'package:discord/features/splash/splash_screen.dart';
 import 'package:discord/service/app_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
@@ -8,7 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:discord/firebase_options.dart';
 import 'package:discord/navigation/app_navigation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -27,8 +26,7 @@ Future<void> main() async {
   auth = FirebaseAuth.instanceFor(app: app);
   final themeMode = await AdaptiveTheme.getThemeMode();
   AppService(getIt);
-  runApp(MultiBlocProvider(
-      providers: AppProvider.providers, child: Discord(themMode: themeMode)));
+  runApp(Discord(themMode: themeMode));
 }
 
 class Discord extends StatelessWidget {
@@ -51,6 +49,7 @@ class Discord extends StatelessWidget {
                   darkTheme: AppTheme.theme(dark: true),
                   themeMode: ThemeMode.dark,
                   debugShowCheckedModeBanner: false,
+                  home: SplashScreen(cubit: getIt()),
                   onGenerateRoute: generateRoute,
                   navigatorKey: AppNavigation.globalKey,
                 );

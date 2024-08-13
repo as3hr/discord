@@ -1,3 +1,4 @@
+import 'package:discord/main.dart';
 import 'package:discord/navigation/app_navigation.dart';
 import 'package:discord/navigation/route_name.dart';
 import 'package:discord/features/home/home_navigator.dart';
@@ -13,7 +14,7 @@ class LoginNavigator with HomeRoute {
 
 mixin LoginRoute {
   void goToLogin() {
-    navigation.push(context, RouteName.login);
+    navigation.push(context, RouteName.login, args: {'loginCubit': getIt()});
   }
 
   BuildContext get context;

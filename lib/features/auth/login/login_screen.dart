@@ -8,11 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
+  const LoginScreen({super.key, required this.cubit});
+  final LoginCubit cubit;
   @override
   Widget build(BuildContext context) {
-    final loginCubit = BlocProvider.of<LoginCubit>(context);
+    final loginCubit = cubit;
     loginCubit.navigation.context = context;
     return Scaffold(
       backgroundColor: AppColor.black5,

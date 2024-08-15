@@ -17,13 +17,11 @@ class SplashCubit extends Cubit<SplashState> {
               localStorageRepository
                   .getUser('USER_EMAIL')
                   .then((value) => value.fold(
-                        (error) => navigator.goToLogin(),
+                        (error) {
+                          navigator.goToLogin();
+                        },
                         (value) {
-                          if (value.isEmpty) {
-                            navigator.goToLogin();
-                          } else {
-                            navigator.goToHome();
-                          }
+                          navigator.goToBottomBar();
                         },
                       ))
             });

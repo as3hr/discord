@@ -7,12 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key, required this.cubit});
+class LoginScreen extends StatefulWidget {
   final LoginCubit cubit;
+  const LoginScreen({super.key, required this.cubit});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    final loginCubit = cubit;
+    final loginCubit = widget.cubit;
     loginCubit.navigation.context = context;
     return Scaffold(
       backgroundColor: AppColor.black5,

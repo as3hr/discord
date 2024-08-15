@@ -4,11 +4,17 @@ import 'package:discord/domain/repositories/local_storage_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrimaryLocalStorageRepository implements LocalStorageRepository {
+  PrimaryLocalStorageRepository();
   @override
   Future<Either<LocalStorageFailure, String>> getUser(String key) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      return right(prefs.getString(key) ?? '');
+      final value = prefs.getString(key);
+      if (value?.isNotEmpty == true) {
+        return right(value!);
+      } else {
+        return left(LocalStorageFailure(error: ''));
+      }
     } catch (error) {
       return left(LocalStorageFailure(error: error.toString()));
     }

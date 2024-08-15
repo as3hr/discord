@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AppNavigation {
-  static final globalKey = GlobalKey<NavigatorState>();
-  // final context = globalKey.currentContext!;
-
-  void push(BuildContext context, String routeName,
-      {Map<String, dynamic>? args}) {
-    Navigator.pushNamed(context, routeName, arguments: args);
+  void push(BuildContext context, String routeName, {arguments}) {
+    Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
   pop(BuildContext context) {
     Navigator.pop(context);
   }
 
-  pushReplacement(BuildContext context, String routeName,
-      {Map<String, dynamic>? args}) {
-    Navigator.pushReplacementNamed(context, routeName, arguments: args);
+  pushReplacement(BuildContext context, String routeName, {arguments}) {
+    Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
   }
 
   popAll(BuildContext context, String routeName) {

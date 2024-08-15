@@ -5,7 +5,10 @@ import 'package:flutter/widgets.dart';
 class HomeNavigator {}
 
 mixin HomeRoute {
-  void goToHome() => navigation.push(context, RouteName.home);
+  void goToHome() {
+    navigation.push(context, RouteName.home);
+  }
+
   AppNavigation get navigation;
   BuildContext get context;
 }

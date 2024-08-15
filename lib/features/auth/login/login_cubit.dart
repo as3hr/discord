@@ -27,7 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
           (user) => {
             emit(state.copyWith(isLoading: false)),
             localStorage.setUser('USER_EMAIL', user.email.toString()),
-            navigation.goToHome(),
+            navigation.goToBottomBar(),
             if (context.mounted)
               {
                 showToast('Logged in successfully!', context),

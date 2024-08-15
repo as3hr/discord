@@ -28,7 +28,7 @@ class AppTheme {
 
   static ThemeData theme({bool dark = false}) {
     return ThemeData(
-      scaffoldBackgroundColor: dark ? AppColor.black2 : AppColor.white,
+      scaffoldBackgroundColor: dark ? AppColor.black6 : AppColor.white,
       useMaterial3: true,
       colorScheme: dark ? darkColortheme : lightColortheme,
       fontFamily: 'SFPro',

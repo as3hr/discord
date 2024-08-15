@@ -4,6 +4,8 @@ import 'package:discord/domain/repositories/local_storage_repository.dart';
 import 'package:discord/domain/repositories/login_repository.dart';
 import 'package:discord/domain/stores/user_store.dart';
 import 'package:discord/features/auth/login/login_cubit.dart';
+import 'package:discord/features/bottom_bar/bottom_bar_cubit.dart';
+import 'package:discord/features/bottom_bar/bottom_bar_navigator.dart';
 import 'package:discord/features/splash/splash_cubit.dart';
 import 'package:discord/navigation/app_navigation.dart';
 import 'package:discord/features/auth/login/login_navigator.dart';
@@ -11,23 +13,17 @@ import 'package:discord/features/splash/splash_navigator.dart';
 import 'package:get_it/get_it.dart';
 
 class AppService {
-  final GetIt getIt;
-  AppService(this.getIt) {
-    initialize();
-  }
-  void initialize() {
+  static Future<void> initialize(GetIt getIt) async {
     getIt.registerSingleton<AppNavigation>(AppNavigation());
     getIt.registerSingleton<LocalStorageRepository>(
-      PrimaryLocalStorageRepository(),
-    );
+        PrimaryLocalStorageRepository());
     getIt.registerSingleton<UserStore>(UserStore());
     getIt.registerSingleton<LoginRepository>(FirebaseLoginRepository(getIt()));
     getIt.registerSingleton<LoginNavigator>(LoginNavigator(getIt()));
     getIt.registerSingleton<SplashNavigator>(SplashNavigator(getIt()));
-    getIt.registerFactoryParam<LoginCubit, dynamic, dynamic>(
-        (params, _) => LoginCubit(getIt(), getIt(), getIt()));
-    getIt.registerFactoryParam<SplashCubit, dynamic, dynamic>(
-      (params, _) => SplashCubit(getIt(), getIt()),
-    );
+    getIt.registerSingleton<SplashCubit>(SplashCubit(getIt(), getIt()));
+    getIt.registerSingleton<LoginCubit>(LoginCubit(getIt(), getIt(), getIt()));
+    getIt.registerSingleton<BottomBarNavigator>(BottomBarNavigator());
+    getIt.registerSingleton<BottomBarCubit>(BottomBarCubit(getIt()));
   }
 }

@@ -1,7 +1,8 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
+import 'package:discord/helpers/styles/app_colors.dart';
+import 'package:discord/helpers/styles/styles.dart';
 import 'package:discord/helpers/widgets/indicator.dart';
-import 'package:discord/navigation/app_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -53,8 +54,7 @@ Future<void> showToast(String message, BuildContext context) async {
   );
 }
 
-Future<bool> showConfirmationDialog(String title) async {
-  final context = AppNavigation.globalKey.currentContext!;
+Future<bool> showConfirmationDialog(String title, BuildContext context) async {
   return await showDialog<bool>(
         context: context,
         builder: (context) {
@@ -63,11 +63,15 @@ Future<bool> showConfirmationDialog(String title) async {
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('No'),
+                child: Text('No',
+                    style: Styles.mediumStyle(
+                        fontSize: 14, color: AppColor.white)),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Yes'),
+                child: Text('Yes',
+                    style: Styles.mediumStyle(
+                        fontSize: 14, color: AppColor.white)),
               ),
             ],
           );

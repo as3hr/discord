@@ -22,7 +22,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RouteName.login:
       return MaterialPageRoute(
           builder: (context) => LoginScreen(
-                cubit: args['loginCubit'],
+                cubit: args['authCubit'],
               ));
 
     case RouteName.bottomBar:

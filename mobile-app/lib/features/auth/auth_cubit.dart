@@ -1,22 +1,23 @@
+import 'package:discord/domain/repositories/auth_repository.dart';
 import 'package:discord/domain/repositories/local_storage_repository.dart';
-import 'package:discord/domain/repositories/login_repository.dart';
+import 'package:discord/features/auth/auth_navigator.dart';
 import 'package:discord/helpers/helpers.dart';
-import 'package:discord/features/auth/login/login_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:discord/features/auth/login/login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  final LoginRepository loginRepository;
-  final LoginNavigator navigation;
+import 'auth_state.dart';
+
+class AuthCubit extends Cubit<AuthState> {
+  final AuthRepository authRepository;
+  final AuthNavigator navigation;
   final LocalStorageRepository localStorage;
-  LoginCubit(this.loginRepository, this.navigation, this.localStorage)
-      : super(LoginState.initial());
+  AuthCubit(this.authRepository, this.navigation, this.localStorage)
+      : super(AuthState.initial());
 
   Future<void> login(
       String email, String password, BuildContext context) async {
     emit(state.copyWith(isLoading: true));
-    loginRepository.login(email, password).then((result) => result.fold(
+    authRepository.login(email, password).then((result) => result.fold(
           (failure) => {
             emit(state.copyWith(isLoading: false)),
             if (context.mounted)

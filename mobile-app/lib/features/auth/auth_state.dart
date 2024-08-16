@@ -1,18 +1,18 @@
-class LoginState {
+class AuthState {
   String email;
   String password;
   bool isLoading;
-  LoginState({
+  AuthState({
     this.isLoading = false,
     required this.email,
     required this.password,
   });
 
-  LoginState copyWith({String? email, String? password, bool? isLoading}) =>
-      LoginState(
+  AuthState copyWith({String? email, String? password, bool? isLoading}) =>
+      AuthState(
           email: email ?? this.email,
           password: password ?? this.password,
           isLoading: isLoading ?? this.isLoading);
 
-  factory LoginState.initial() => LoginState(email: '', password: '');
+  factory AuthState.initial() => AuthState(email: '', password: '');
 }

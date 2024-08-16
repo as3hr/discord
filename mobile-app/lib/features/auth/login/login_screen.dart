@@ -1,14 +1,15 @@
+import 'package:discord/features/auth/auth_cubit.dart';
 import 'package:discord/helpers/styles/app_colors.dart';
 import 'package:discord/helpers/styles/styles.dart';
 import 'package:discord/helpers/widgets/input_field.dart';
-import 'package:discord/features/auth/login/login_cubit.dart';
-import 'package:discord/features/auth/login/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../auth_state.dart';
+
 class LoginScreen extends StatefulWidget {
-  final LoginCubit cubit;
+  final AuthCubit cubit;
   const LoginScreen({super.key, required this.cubit});
 
   @override
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     loginCubit.navigation.context = context;
     return Scaffold(
       backgroundColor: AppColor.black5,
-      body: BlocBuilder<LoginCubit, LoginState>(
+      body: BlocBuilder<AuthCubit, AuthState>(
           bloc: loginCubit,
           builder: (context, state) {
             return Column(

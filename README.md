@@ -43,27 +43,27 @@ A powerful and modern Flutter-based mobile application with a Node.js backend, f
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repo/nodejs-backend.git
+    git clone https://github.com/as3hr/discord
     ```
 2. Install dependencies:
     ```bash
-    cd nodejs-backend
+    cd backend
     npm install
     ```
 3. Start the server:
     ```bash
-    npm start
+    npm run dev
     ```
 
 ### Frontend (Flutter)
 
 1. Clone the Flutter mobile application repository:
     ```bash
-    git clone https://github.com/your-repo/flutter-app.git
+    git clone https://github.com/as3hr/discord/
     ```
 2. Install dependencies:
     ```bash
-    cd flutter-app
+    cd mobile-app
     flutter pub get
     ```
 3. Run the app:

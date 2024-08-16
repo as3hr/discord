@@ -13,15 +13,16 @@ class HomeCubit extends Cubit<HomeState> {
   void onDragUpdate(DragUpdateDetails details) {
     final newPanelOffset =
         (state.panelOffsetX + details.delta.dx).clamp(0.sw, 1.sw);
-    // final bottomBarOffset = -3 * (newPanelOffset / 1.sw);
-    final bottomBarOffset = -3 + (1.sh - -3) * (newPanelOffset / 1.sw);
-    emit(state.copyWith(
-        panelOffsetX: newPanelOffset, bottomBarOffset: bottomBarOffset));
+    if (state.panelOffsetX != newPanelOffset) {
+      final bottomBarOffset = (state.bottomBarOffset / 2) - newPanelOffset;
+      emit(state.copyWith(
+          panelOffsetX: newPanelOffset, bottomBarOffset: bottomBarOffset));
+    }
   }
 
   void onDragEnd() {
     if (state.panelOffsetX < 0.5.sw) {
-      emit(state.copyWith(panelOffsetX: 0, bottomBarOffset: 1.sh));
+      emit(state.copyWith(panelOffsetX: 0, bottomBarOffset: -65));
     } else {
       emit(state.copyWith(panelOffsetX: 1.sw, bottomBarOffset: -3));
     }

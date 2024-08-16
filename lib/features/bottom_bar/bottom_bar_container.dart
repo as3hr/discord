@@ -21,26 +21,30 @@ class BottomBarContainer extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
         bloc: homeCubit,
         builder: (context, homeState) {
-          return Container(
-            width: 1.sw,
-            height: 0.075.sh,
-            decoration: const BoxDecoration(
-              color: AppColor.black4,
+          return AnimatedPositioned(
+            duration: const Duration(milliseconds: 150),
+            bottom: homeState.bottomBarOffset,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              width: 1.sw,
+              decoration: const BoxDecoration(
+                color: AppColor.black4,
+              ),
+              child: BlocBuilder<BottomBarCubit, BottomBarState>(
+                  bloc: cubit,
+                  builder: (context, bottomBarState) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: bottomBarState.items.mapIndexed((index, item) {
+                        return BottomBarIcon(
+                          item: item,
+                          bottomBarCubit: getIt(),
+                          index: index,
+                        );
+                      }).toList(),
+                    );
+                  }),
             ),
-            child: BlocBuilder<BottomBarCubit, BottomBarState>(
-                bloc: cubit,
-                builder: (context, bottomBarState) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: bottomBarState.items.mapIndexed((index, item) {
-                      return BottomBarIcon(
-                        item: item,
-                        bottomBarCubit: getIt(),
-                        index: index,
-                      );
-                    }).toList(),
-                  );
-                }),
           );
         });
   }

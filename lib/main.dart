@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:discord/features/splash/splash_screen.dart';
 import 'package:discord/service/app_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,27 +34,31 @@ class Discord extends StatelessWidget {
   const Discord({super.key, required this.themMode});
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: AppTheme.theme(),
-      initial: themMode ?? AdaptiveThemeMode.dark,
-      dark: AppTheme.theme(dark: true),
-      builder: (light, dark) {
-        return GlobalLoaderOverlay(
-          overlayColor: Colors.transparent,
-          child: ScreenUtilInit(
-              designSize: Size(context.screenWidth, context.screenHeight),
-              builder: (context, _) {
-                return MaterialApp(
-                  theme: AppTheme.theme(),
-                  darkTheme: AppTheme.theme(dark: true),
-                  themeMode: ThemeMode.dark,
-                  debugShowCheckedModeBanner: false,
-                  home: SplashScreen(cubit: getIt()),
-                  onGenerateRoute: generateRoute,
-                );
-              }),
-        );
-      },
-    );
+    return DevicePreview(
+        enabled: false,
+        builder: (context) {
+          return AdaptiveTheme(
+            light: AppTheme.theme(),
+            initial: themMode ?? AdaptiveThemeMode.dark,
+            dark: AppTheme.theme(dark: true),
+            builder: (light, dark) {
+              return GlobalLoaderOverlay(
+                overlayColor: Colors.transparent,
+                child: ScreenUtilInit(
+                    designSize: Size(context.screenWidth, context.screenHeight),
+                    builder: (context, _) {
+                      return MaterialApp(
+                        theme: AppTheme.theme(),
+                        darkTheme: AppTheme.theme(dark: true),
+                        themeMode: ThemeMode.dark,
+                        debugShowCheckedModeBanner: false,
+                        home: SplashScreen(cubit: getIt()),
+                        onGenerateRoute: generateRoute,
+                      );
+                    }),
+              );
+            },
+          );
+        });
   }
 }

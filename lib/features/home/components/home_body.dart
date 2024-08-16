@@ -13,27 +13,32 @@ class HomeBody extends StatelessWidget {
         Container(
           width: 0.2.sw,
           height: 1.sh,
-          color: AppColor.black6,
-          child: Column(
-            children: List.generate(10, (index) {
-              return Text('$index');
-            }),
+          color: const Color.fromRGBO(35, 39, 42, 1),
+          child: SingleChildScrollView(
+            child: Column(
+              children: List.generate(10, (index) {
+                return Text('$index');
+              }),
+            ),
           ),
         ),
         Expanded(
           child: Container(
+            height: 1.sh,
             decoration: const BoxDecoration(
                 color: AppColor.black5,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                 )),
-            child: Column(
-              children: List.generate(20, (index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('$index'),
-                );
-              }),
+            child: SingleChildScrollView(
+              child: Column(
+                children: List.generate(20, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('$index'),
+                  );
+                }),
+              ),
             ),
           ),
         ),

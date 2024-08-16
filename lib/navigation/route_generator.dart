@@ -37,15 +37,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const ProfileScreen());
 
     case RouteName.home:
-      return MaterialPageRoute(builder: (context) => const HomeScreen());
+      return MaterialPageRoute(
+          builder: (context) => HomeScreen(cubit: args['homeCubit']));
 
     case RouteName.notification:
       return MaterialPageRoute(builder: (context) => const NotificationPage());
 
     case RouteName.settings:
-      return MaterialPageRoute(builder: (context) => const HomeScreen());
+      return MaterialPageRoute(builder: (context) => const ProfileScreen());
 
     default:
-      return MaterialPageRoute(builder: (context) => const HomeScreen());
+      return MaterialPageRoute(
+          builder: (context) => const Scaffold(
+                body: Center(
+                  child: Text('PAGE NOT FOUND!!'),
+                ),
+              ));
   }
 }

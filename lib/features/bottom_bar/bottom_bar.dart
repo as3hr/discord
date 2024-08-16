@@ -28,7 +28,8 @@ class BottomBar extends StatelessWidget {
             },
             child: Scaffold(
               body: state.page,
-              bottomNavigationBar: BottomBarContainer(cubit: getIt()),
+              bottomNavigationBar:
+                  BottomBarContainer(cubit: getIt(), homeCubit: getIt()),
             ),
           );
         });

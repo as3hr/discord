@@ -3,6 +3,8 @@ import 'package:discord/features/notification/notification_page.dart';
 import 'package:discord/features/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main.dart';
+
 class BottomBarItem {
   Widget page;
   String title;
@@ -16,7 +18,7 @@ class BottomBarItem {
   static final items = [
     BottomBarItem(
       icon: 'home',
-      page: const HomeScreen(),
+      page: HomeScreen(cubit: getIt()),
       title: 'Home',
     ),
     BottomBarItem(

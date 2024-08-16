@@ -6,6 +6,7 @@ import 'package:discord/domain/stores/user_store.dart';
 import 'package:discord/features/auth/login/login_cubit.dart';
 import 'package:discord/features/bottom_bar/bottom_bar_cubit.dart';
 import 'package:discord/features/bottom_bar/bottom_bar_navigator.dart';
+import 'package:discord/features/home/home_cubit.dart';
 import 'package:discord/features/splash/splash_cubit.dart';
 import 'package:discord/navigation/app_navigation.dart';
 import 'package:discord/features/auth/login/login_navigator.dart';
@@ -15,6 +16,7 @@ import 'package:get_it/get_it.dart';
 class AppService {
   static Future<void> initialize(GetIt getIt) async {
     getIt.registerSingleton<AppNavigation>(AppNavigation());
+    getIt.registerSingleton<HomeCubit>(HomeCubit());
     getIt.registerSingleton<LocalStorageRepository>(
         PrimaryLocalStorageRepository());
     getIt.registerSingleton<UserStore>(UserStore());

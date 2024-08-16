@@ -7,7 +7,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeState.empty());
 
   onInit() {
-    emit(state.copyWith(panelOffsetX: 1.sw, bottomBarOffset: -3));
+    emit(state.copyWith(panelOffsetX: 1.sw, bottomBarOffset: 0.005.sh));
   }
 
   void onDragUpdate(DragUpdateDetails details) {
@@ -24,7 +24,7 @@ class HomeCubit extends Cubit<HomeState> {
     if (state.panelOffsetX < 0.5.sw) {
       emit(state.copyWith(panelOffsetX: 0, bottomBarOffset: -65));
     } else {
-      emit(state.copyWith(panelOffsetX: 1.sw, bottomBarOffset: -3));
+      emit(state.copyWith(panelOffsetX: 1.sw, bottomBarOffset: 0.005.sh));
     }
   }
 }

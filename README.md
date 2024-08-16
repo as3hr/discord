@@ -1,5 +1,5 @@
 
-# Flutter WebRTC & Chat Application
+# Flutter WebRTC & Chat Application ( IN DEVELOPMENT )
 
 A powerful and modern Flutter-based mobile application with a Node.js backend, featuring WebRTC for audio and video calling, real-time chat, server/channel creation, and more. Built using clean architecture principles and Bloc/Cubit for state management.
 

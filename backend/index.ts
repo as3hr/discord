@@ -1,18 +1,18 @@
 import { configDotenv } from 'dotenv';
 import express from 'express';
-import { Server } from "socket.io";
+// import { Server } from "socket.io";
 import cors from "cors";
 import { queryParser } from "express-query-parser";
 import http from 'http';
-import * as mediasoup from 'mediasoup';
+// import * as mediasoup from 'mediasoup';
 import { 
     authRouter, 
-    webRtc 
+    // webRtc 
 } from './export';
 
 configDotenv({path : '.env'});
-let worker: mediasoup.types.Worker;
-let router: mediasoup.types.Router;
+// let worker: mediasoup.types.Worker;
+// let router: mediasoup.types.Router;
 
 const app = express();
 app.use(cors({ origin: true, credentials: true }));
@@ -29,36 +29,36 @@ app.use(
 
 const httpServer = http.createServer(app);
 
-const initMediaSoup = async () => {
-    worker = await mediasoup.createWorker({
-        rtcMinPort: 10000,
-        rtcMaxPort: 10100
-    });
-    worker.on('died', ()=>{
-        console.error('Mediasoup Worker died, exiting...');
-        process.exit(1);
-    });
+// const initMediaSoup = async () => {
+//     worker = await mediasoup.createWorker({
+//         rtcMinPort: 10000,
+//         rtcMaxPort: 10100
+//     });
+//     worker.on('died', ()=>{
+//         console.error('Mediasoup Worker died, exiting...');
+//         process.exit(1);
+//     });
 
-    router = await worker.createRouter({
-        mediaCodecs: [
-            {
-                kind: 'audio',
-                mimeType: 'audio/opus',
-                clockRate: 48000,
-                channels: 2,
-            },
-            {
-                kind: 'video',
-                mimeType: 'video/VP8',
-                clockRate: 90000,
-            },
-        ]});
-};
+//     router = await worker.createRouter({
+//         mediaCodecs: [
+//             {
+//                 kind: 'audio',
+//                 mimeType: 'audio/opus',
+//                 clockRate: 48000,
+//                 channels: 2,
+//             },
+//             {
+//                 kind: 'video',
+//                 mimeType: 'video/VP8',
+//                 clockRate: 90000,
+//             },
+//         ]});
+// };
 
-initMediaSoup().then((val) => {});
+// initMediaSoup().then((val) => {});
 
-const io = new Server(httpServer);
-webRtc(io);
+// const io = new Server(httpServer);
+// webRtc(io);
 
 app.use('/auth', authRouter);
 

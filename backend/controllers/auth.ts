@@ -1,7 +1,6 @@
 import  Jwt from "jsonwebtoken";
 import { NextFunction, Response, Request } from 'express';
-import { asyncHandler } from '../export';
-import { userModel } from "../schemas/user";
+import { asyncHandler, userModel } from '../export';
 
 export const login = asyncHandler( 
     async (req: Request,res: Response, next: NextFunction) => {

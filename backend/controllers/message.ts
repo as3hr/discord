@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { asyncHandler } from "../export";
-import { messageModel } from "../schemas/message";
+import { asyncHandler, messageModel } from "../export";
 
 export const getMessages = asyncHandler(
     async(req: Request, res: Response, next: NextFunction) => {

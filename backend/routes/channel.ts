@@ -1,8 +1,14 @@
 import Router from 'express';
-import { checkToken } from '../export';
-import { assignChannelModel, getChannels } from '../controllers/channel';
-import { pagination } from '../middlewares/pagination';
-import { createDocument, deleteDocument, fetchSingleDocument, updateDocument } from '../middlewares/doc_operation';
+import { 
+    checkToken,
+    assignChannelModel, 
+    getChannels,
+    pagination,
+    createDocument, 
+    deleteDocument, 
+    fetchSingleDocument, 
+    updateDocument 
+} from '../export';
 
 const router = Router();
 
@@ -13,5 +19,5 @@ router.put('/:id', checkToken, assignChannelModel, updateDocument);
 router.delete('/:id', checkToken, assignChannelModel, deleteDocument);
 
 export {
-    router as serverRouter
+    router as channelRouter
 }

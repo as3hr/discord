@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { asyncHandler } from "../export";
-import { serverModel } from "../schemas/server";
+import { asyncHandler, serverModel } from "../export";
 
 export const getServers = asyncHandler(
     async(req: Request, res: Response, next: NextFunction) => {

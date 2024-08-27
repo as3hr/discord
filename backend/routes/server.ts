@@ -1,8 +1,14 @@
 import Router from 'express';
-import { checkToken } from '../export';
-import { assignServerModel, getServers } from '../controllers/server';
-import { pagination } from '../middlewares/pagination';
-import { createDocument, deleteDocument, fetchSingleDocument, updateDocument } from '../middlewares/doc_operation';
+import { 
+    checkToken,
+    createDocument, 
+    deleteDocument, 
+    fetchSingleDocument, 
+    updateDocument,
+    assignServerModel, 
+    getServers,
+    pagination,
+} from '../export';
 
 const router = Router();
 

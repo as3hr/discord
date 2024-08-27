@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { asyncHandler } from "../export";
-import { HttpError } from "../utils/http_error";
+import { asyncHandler, HttpError } from "../export";
 
 const createDocument = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

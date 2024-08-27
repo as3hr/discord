@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import mongoose, { isValidObjectId } from "mongoose";
-import { asyncHandler } from "../export";
-import { parse } from "../utils/parse";
+import { asyncHandler, parse } from "../export";
 
 interface PaginatedResult {
   totalCount?: number;

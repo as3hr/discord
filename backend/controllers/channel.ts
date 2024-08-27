@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { asyncHandler } from "../export";
-import { channelModel } from "../schemas/channel";
+import { asyncHandler,channelModel } from "../export";
 
 export const getChannels = asyncHandler(
     async(req: Request, res: Response, next: NextFunction) => {

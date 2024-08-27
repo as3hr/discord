@@ -10,13 +10,30 @@ enum channelType{
 export interface IChannel extends Document {
     title: string
     description: string
-    users: IUser[]
     channelType: channelType
-    channelChat?: IChannelChat
+    channelChat: IChannelChat
 }
 
-const channelSchema = new Schema<IChannel>(
-
-);
+const channelSchema = new Schema<IChannel>({
+    title: { 
+        type: String, 
+        cast: "Invalid title type" 
+    },
+    description: { 
+        type: String, 
+        cast: "Invalid description type" 
+    },
+    channelType: { 
+        type: String, 
+        enum: Object.values(channelType), 
+        default: channelType.text, 
+        cast: "Invalid chatType" 
+    },
+    channelChat: { 
+        type: Schema.Types.ObjectId, 
+        ref: "channelChats", 
+        cast: "Invalid channel Chat type" 
+    }
+});
 
 export const channelModel = mongoose.model<IChannel>("channels", channelSchema);

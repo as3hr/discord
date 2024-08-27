@@ -9,6 +9,7 @@ import {
     authRouter, 
     // webRtc 
 } from './export';
+import { configureDatabase } from './config/db';
 
 configDotenv({path : '.env'});
 // let worker: mediasoup.types.Worker;
@@ -61,6 +62,8 @@ const httpServer = http.createServer(app);
 // webRtc(io);
 
 app.use('/auth', authRouter);
+
+configureDatabase();
 
 httpServer.listen(5000, ()=>{
     console.log("Server is running on port 5000");

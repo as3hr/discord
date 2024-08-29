@@ -36,7 +36,7 @@ A powerful and modern Flutter-based mobile application with a Node.js backend, f
   - REST API for CRUD operations
   - WebRTC signaling for audio/video communication
   - WebSockets for real-time chat
-  - Postgres for the database
+  - MongoDb for the database
 
 ## Installation
 

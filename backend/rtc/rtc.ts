@@ -2,6 +2,7 @@ import { Server, Socket } from "socket.io";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { createWebRtcTransport, producers, transports } from "./rtc_helpers";
 import { router } from "../config/media_soup_config";
+import { AppData, Producer, WebRtcTransport } from "mediasoup/node/lib/types";
 
 export const rtc = (
     io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>,
@@ -19,7 +20,7 @@ export const rtc = (
 
     socket.on('produce', async (data, callback) => {
         const { kind, rtpParameters, transportId, channelId } = data;
-        const transport = transports.get(transportId);
+        const transport: WebRtcTransport<AppData> = transports.get(transportId);
         
         const producer = await transport.produce({
             kind,
@@ -35,8 +36,8 @@ export const rtc = (
 
     socket.on('consume', async (data, callback) => {
         const { rtpCapabilities, producerId, transportId, channelId } = data;
-        const transport = transports.get(transportId);
-        const producer = producers.get(producerId);
+        const transport: WebRtcTransport<AppData> = transports.get(transportId);
+        const producer: Producer<AppData> = producers.get(producerId);
 
         if (!router.canConsume({ producerId: producer.id, rtpCapabilities })) {
             console.error('Client cannot consume');
@@ -55,7 +56,7 @@ export const rtc = (
             rtpParameters: consumer.rtpParameters,
         });
 
-        consumer.on('close', () => {
+        consumer.on('@close', () => {
             console.log('Consumer closed');
         });
     });

@@ -34,8 +34,8 @@ app.use('/servers', serverRouter);
 
 configureDatabase();
 
-httpServer.listen(5000, ()=>{
-    console.log("Server is running on port 5000");
+httpServer.listen(process.env.PORT, () => {
+    console.log(`Server is running on port: ${process.env.PORT}`);
 });
 
 configureSocketAndRtc(httpServer);

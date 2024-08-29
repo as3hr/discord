@@ -2,6 +2,7 @@ import 'package:discord/features/auth/register/resgister_screen.dart';
 import 'package:discord/features/bottom_bar/bottom_bar.dart';
 import 'package:discord/features/notification/notification_page.dart';
 import 'package:discord/features/profile/profile_screen.dart';
+import 'package:discord/main.dart';
 import 'package:flutter/material.dart';
 import 'package:discord/navigation/route_name.dart';
 
@@ -10,25 +11,25 @@ import '../features/home/home_screen.dart';
 import '../features/splash/splash_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  final args =
-      (settings.arguments ?? <String, dynamic>{}) as Map<String, dynamic>;
+  // final args =
+  //     (settings.arguments ?? <String, dynamic>{}) as Map<String, dynamic>;
   switch (settings.name) {
     case RouteName.splash:
       return MaterialPageRoute(
           builder: (context) => SplashScreen(
-                cubit: args['splashCubit'],
+                cubit: getIt(),
               ));
 
     case RouteName.login:
       return MaterialPageRoute(
           builder: (context) => LoginScreen(
-                cubit: args['authCubit'],
+                cubit: getIt(),
               ));
 
     case RouteName.bottomBar:
       return MaterialPageRoute(
           builder: (context) => BottomBar(
-                cubit: args['bottomBarCubit'],
+                cubit: getIt(),
               ));
     case RouteName.register:
       return MaterialPageRoute(builder: (context) => const ResgisterScreen());
@@ -38,7 +39,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case RouteName.home:
       return MaterialPageRoute(
-          builder: (context) => HomeScreen(cubit: args['homeCubit']));
+          builder: (context) => HomeScreen(cubit: getIt()));
 
     case RouteName.notification:
       return MaterialPageRoute(builder: (context) => const NotificationPage());

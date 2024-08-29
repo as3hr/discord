@@ -11,17 +11,24 @@ import 'package:discord/features/home/home_cubit.dart';
 import 'package:discord/features/splash/splash_cubit.dart';
 import 'package:discord/navigation/app_navigation.dart';
 import 'package:discord/features/splash/splash_navigator.dart';
+import 'package:discord/network/network_repository.dart';
+import 'package:discord/service/api_service.dart';
 import 'package:get_it/get_it.dart';
 
 class AppService {
   static Future<void> initialize(GetIt getIt) async {
     getIt.registerSingleton<AppNavigation>(AppNavigation());
+    getIt.registerSingleton<ApiService>(ApiService());
+    getIt.registerSingleton<NetworkRepository>(NetworkRepository(getIt()));
     getIt.registerSingleton<HomeCubit>(HomeCubit());
     getIt.registerSingleton<LocalStorageRepository>(
       PrimaryLocalStorageRepository(),
     );
     getIt.registerSingleton<UserStore>(UserStore());
-    getIt.registerSingleton<AuthRepository>(ApiAuthRepository(getIt()));
+    getIt.registerSingleton<AuthRepository>(ApiAuthRepository(
+      getIt(),
+      getIt(),
+    ));
     getIt.registerSingleton<AuthNavigator>(AuthNavigator(getIt()));
     getIt.registerSingleton<SplashNavigator>(SplashNavigator(getIt()));
     getIt.registerSingleton<SplashCubit>(SplashCubit(getIt(), getIt()));

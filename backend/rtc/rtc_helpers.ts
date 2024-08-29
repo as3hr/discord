@@ -1,10 +1,11 @@
+import { AppData, WebRtcTransport } from "mediasoup/node/lib/types";
 import { router } from "../config/media_soup_config";
 
 export const transports = new Map();
 export const producers = new Map(); 
 
 export const createWebRtcTransport = async () => {
-    const transport = await router.createWebRtcTransport({
+    const transport: WebRtcTransport<AppData> = await router.createWebRtcTransport({
       listenIps: [{ ip: '0.0.0.0', announcedIp: 'YOUR_SERVER_IP' }],
       enableUdp: true,
       enableTcp: true,

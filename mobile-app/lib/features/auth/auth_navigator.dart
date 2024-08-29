@@ -1,6 +1,4 @@
-import 'package:discord/features/auth/auth_cubit.dart';
 import 'package:discord/features/bottom_bar/bottom_bar_navigator.dart';
-import 'package:discord/main.dart';
 import 'package:discord/navigation/app_navigation.dart';
 import 'package:discord/navigation/route_name.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +13,7 @@ class AuthNavigator with BottomBarRoute {
 
 mixin AuthRoute {
   void goToLogin() {
-    navigation.push(context, RouteName.login,
-        arguments: {'authCubit': getIt<AuthCubit>()});
+    navigation.push(context, RouteName.login);
   }
 
   void goToRegister() {

@@ -22,6 +22,25 @@ Future<void> loader(Future<void> func, BuildContext context) async {
   }
 }
 
+List<T> parseResponse<T>(
+  response,
+  T Function(Map<String, dynamic>) fromJson,
+) {
+  var data = (response)['result'];
+  if (data is! List) {
+    data = data['data'];
+  }
+  return parseList(data, fromJson);
+}
+
+List<T> parseList<T>(
+  data,
+  T Function(Map<String, dynamic>) fromJson,
+) {
+  final parsedData = (data as List?)?.cast<Map<String, dynamic>>();
+  return parsedData?.map(fromJson).toList().cast<T>() ?? [];
+}
+
 Future<void> showToast(String message, BuildContext context) async {
   showDialog(
     context: context,

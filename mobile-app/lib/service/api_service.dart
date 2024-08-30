@@ -1,13 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:discord/domain/failures/network_failure.dart';
+import 'package:discord/domain/repositories/local_storage_repository.dart';
 
 class ApiService {
-  static const baseUrl = 'http://192.168.1.148:5000';
-  late Dio dio;
-  ApiService() {
+  final LocalStorageRepository localStorageRepository;
+  ApiService(this.localStorageRepository) {
     _initializeApiService();
   }
+  static const baseUrl = 'http://192.168.1.148:5000';
+  String _tokenValue = '';
+  String tokenKey = 'APP_TOKEN';
+  late Dio dio;
+
   void _initializeApiService() {
     dio = Dio(
       BaseOptions(
@@ -16,18 +21,38 @@ class ApiService {
         responseType: ResponseType.json,
       ),
     );
+    dio.interceptors.add(InterceptorsWrapper(
+      onResponse: (response, handler) {
+        final body = response.data;
+        if (body != null) {
+          if (body['token'] != null) {
+            _tokenValue = body['token'];
+            localStorageRepository.setValue(tokenKey, _tokenValue);
+          }
+        }
+        return handler.next(response);
+      },
+      onRequest: (options, handler) {
+        if (_tokenValue.isNotEmpty) {
+          options.headers['Authorization'] = 'Bearer $_tokenValue';
+        }
+        return handler.next(options);
+      },
+    ));
   }
 
   Either<NetworkFailure, Map<String, dynamic>> checkError(Response response) {
     final body = response.data;
     if ((response.statusCode == 200 || response.statusCode == 201) ||
-        response.data['success'] == true) {
+        body['success'] == true) {
       return right(body);
     } else {
-      return left(NetworkFailure(
-        error:
-            'Request ended with status code: ${response.statusCode}, with a Network error!',
-      ));
+      return left(
+        NetworkFailure(
+          error:
+              'Request ended with status code: ${response.statusCode}, with a Network error!',
+        ),
+      );
     }
   }
 }

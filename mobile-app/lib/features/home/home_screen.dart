@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../domain/stores/user_store.dart';
+import '../../main.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.cubit});
   final HomeCubit cubit;
@@ -16,6 +19,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late HomeCubit homeCubit;
+  final user = getIt<UserStore>().state;
+
   @override
   void initState() {
     super.initState();
@@ -60,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Panel Item $index',
+                                  'Panel Item $index + User is: ${user.email}',
                                   style: const TextStyle(color: AppColor.white),
                                 ),
                               );

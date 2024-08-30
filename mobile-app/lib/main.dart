@@ -15,10 +15,6 @@ final getIt = GetIt.instance;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // app = await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  // auth = FirebaseAuth.instanceFor(app: app);
   final themeMode = await AdaptiveTheme.getThemeMode();
   await AppService.initialize(getIt);
   runApp(Discord(themMode: themeMode));

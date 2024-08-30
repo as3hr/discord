@@ -18,12 +18,12 @@ import 'package:get_it/get_it.dart';
 class AppService {
   static Future<void> initialize(GetIt getIt) async {
     getIt.registerSingleton<AppNavigation>(AppNavigation());
-    getIt.registerSingleton<ApiService>(ApiService());
-    getIt.registerSingleton<NetworkRepository>(NetworkRepository(getIt()));
-    getIt.registerSingleton<HomeCubit>(HomeCubit());
     getIt.registerSingleton<LocalStorageRepository>(
       PrimaryLocalStorageRepository(),
     );
+    getIt.registerSingleton<ApiService>(ApiService(getIt()));
+    getIt.registerSingleton<NetworkRepository>(NetworkRepository(getIt()));
+    getIt.registerSingleton<HomeCubit>(HomeCubit());
     getIt.registerSingleton<UserStore>(UserStore());
     getIt.registerSingleton<AuthRepository>(ApiAuthRepository(
       getIt(),
@@ -32,7 +32,7 @@ class AppService {
     getIt.registerSingleton<AuthNavigator>(AuthNavigator(getIt()));
     getIt.registerSingleton<SplashNavigator>(SplashNavigator(getIt()));
     getIt.registerSingleton<SplashCubit>(SplashCubit(getIt(), getIt()));
-    getIt.registerSingleton<AuthCubit>(AuthCubit(getIt(), getIt(), getIt()));
+    getIt.registerSingleton<AuthCubit>(AuthCubit(getIt(), getIt()));
     getIt.registerSingleton<BottomBarNavigator>(BottomBarNavigator());
     getIt.registerSingleton<BottomBarCubit>(BottomBarCubit(getIt()));
   }

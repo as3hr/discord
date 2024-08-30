@@ -15,7 +15,7 @@ class SplashCubit extends Cubit<SplashState> {
         const Duration(seconds: 2),
         () => {
               localStorageRepository
-                  .getUser('USER_EMAIL')
+                  .getValue('USER_EMAIL')
                   .then((value) => value.fold(
                         (error) {
                           navigator.goToLogin();

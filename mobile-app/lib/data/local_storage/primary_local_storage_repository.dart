@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PrimaryLocalStorageRepository implements LocalStorageRepository {
   PrimaryLocalStorageRepository();
   @override
-  Future<Either<LocalStorageFailure, String>> getUser(String key) async {
+  Future<Either<LocalStorageFailure, String>> getValue(String key) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final value = prefs.getString(key);
@@ -21,7 +21,7 @@ class PrimaryLocalStorageRepository implements LocalStorageRepository {
   }
 
   @override
-  Future<Either<LocalStorageFailure, bool>> setUser(
+  Future<Either<LocalStorageFailure, bool>> setValue(
     String key,
     String value,
   ) async {
@@ -35,7 +35,7 @@ class PrimaryLocalStorageRepository implements LocalStorageRepository {
   }
 
   @override
-  Future<Either<LocalStorageFailure, bool>> deleteUser(String key) async {
+  Future<Either<LocalStorageFailure, bool>> deleteValue(String key) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       prefs.remove(key);

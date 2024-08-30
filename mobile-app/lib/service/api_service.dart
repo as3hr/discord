@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:discord/domain/failures/network_failure.dart';
 import 'package:discord/domain/repositories/local_storage_repository.dart';
 
+import '../helpers/strings.dart';
+
 class ApiService {
   final LocalStorageRepository localStorageRepository;
   ApiService(this.localStorageRepository) {
@@ -10,7 +12,6 @@ class ApiService {
   }
   static const baseUrl = 'http://192.168.1.148:5000';
   String _tokenValue = '';
-  String tokenKey = 'APP_TOKEN';
   late Dio dio;
 
   void _initializeApiService() {

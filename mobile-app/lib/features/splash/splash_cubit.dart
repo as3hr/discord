@@ -1,5 +1,6 @@
 import 'package:discord/domain/repositories/local_storage_repository.dart';
 import 'package:discord/features/splash/splash_navigator.dart';
+import 'package:discord/helpers/strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'splash_state.dart';
@@ -15,7 +16,7 @@ class SplashCubit extends Cubit<SplashState> {
         const Duration(seconds: 2),
         () => {
               localStorageRepository
-                  .getValue('USER_EMAIL')
+                  .getValue(tokenKey)
                   .then((value) => value.fold(
                         (error) {
                           navigator.goToLogin();

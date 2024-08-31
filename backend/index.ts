@@ -1,4 +1,4 @@
-import { configDotenv } from 'dotenv';
+import dotenv from 'dotenv';
 import express from 'express';
 import cors from "cors";
 import { queryParser } from "express-query-parser";
@@ -11,7 +11,7 @@ import {
 } from './export';
 import { configureSocketAndRtc } from './config/socket';
 
-configDotenv({path : '.env'});
+dotenv.config({path : '.env'});
 
 const app = express();
 app.use(cors({ origin: true, credentials: true }));

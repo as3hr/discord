@@ -1,4 +1,5 @@
 import  Jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import { NextFunction, Response, Request } from 'express';
 import { asyncHandler, userModel } from '../export';
 
@@ -9,8 +10,8 @@ export const login = asyncHandler(
         return res.status(400).json({message: "Please provide email and password"});
     }
     const user = await userModel.findOne({email: email});
-    if(user && await user.comparePassword(user.password!)){
-        const token = generateToken(1);
+    if(user && await user.comparePassword(password)){
+        const token = generateToken(user.id);
         res.send({
             token: token,
             result: user,
@@ -26,7 +27,7 @@ export const resgister = asyncHandler(
         return res.status(400).json({message: "Name, email or password is missing!"});
      }
      const user = await userModel.create(req.body);
-     const token = generateToken(1);
+     const token = generateToken(user.id);
      res.send({
         token: token,
         result: user,

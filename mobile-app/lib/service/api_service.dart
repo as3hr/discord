@@ -10,7 +10,7 @@ class ApiService {
   ApiService(this.localStorageRepository) {
     _initializeApiService();
   }
-  static const baseUrl = 'http://192.168.1.148:5000';
+  static const baseUrl = 'http://192.168.1.104:5000';
   String _tokenValue = '';
   late Dio dio;
 

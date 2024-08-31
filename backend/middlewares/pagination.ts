@@ -103,7 +103,7 @@ const aggregatedPagination = asyncHandler(
         } else if (val == null || val === "null" || val === "undefined") {
           delete query[key];
         } else {
-          query[key] = parseValue(val);
+          // query[key] = parseValue(val);
         }
       });
       console.log(JSON.stringify(query));

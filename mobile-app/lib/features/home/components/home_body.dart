@@ -1,10 +1,15 @@
+import 'package:discord/features/home/components/server_container.dart';
+import 'package:discord/features/home/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../helpers/styles/app_colors.dart';
+import '../home_state.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
+  const HomeBody({super.key, required this.cubit});
+  final HomeCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,20 @@ class HomeBody extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: List.generate(10, (index) {
-                return Text('$index');
+                return BlocBuilder<HomeCubit, HomeState>(
+                  bloc: cubit,
+                  builder: (context, state) {
+                    return GestureDetector(
+                      onTap: () {
+                        cubit.updateServerIndex(index);
+                      },
+                      child: ServerContainer(
+                        isSelected: state.serverIndex == index,
+                        content: Text('$index'),
+                      ),
+                    );
+                  },
+                );
               }),
             ),
           ),

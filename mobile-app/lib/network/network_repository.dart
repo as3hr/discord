@@ -22,7 +22,10 @@ class NetworkRepository {
     required Map<String, dynamic> data,
     Map<String, dynamic>? extraQuery,
   }) async {
-    final response = await apiService.dio.put(url, data: data);
+    final response =
+        await apiService.dio.put(url, data: data, queryParameters: {
+      ...?extraQuery,
+    });
     final result = apiService.checkError(response);
     return result.fold((failure) => left(failure), (body) => right(body));
   }
@@ -32,7 +35,10 @@ class NetworkRepository {
     required Map<String, dynamic> data,
     Map<String, dynamic>? extraQuery,
   }) async {
-    final response = await apiService.dio.post(url, data: data);
+    final response =
+        await apiService.dio.post(url, data: data, queryParameters: {
+      ...?extraQuery,
+    });
     final result = apiService.checkError(response);
     return result.fold((failure) => left(failure), (body) => right(body));
   }
@@ -41,7 +47,9 @@ class NetworkRepository {
     required String url,
     Map<String, dynamic>? extraQuery,
   }) async {
-    final response = await apiService.dio.delete(url);
+    final response = await apiService.dio.delete(url, queryParameters: {
+      ...?extraQuery,
+    });
     final result = apiService.checkError(response);
     return result.fold((failure) => left(failure), (body) => right(body));
   }

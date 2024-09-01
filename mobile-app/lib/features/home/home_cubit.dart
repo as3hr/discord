@@ -27,4 +27,8 @@ class HomeCubit extends Cubit<HomeState> {
       emit(state.copyWith(panelOffsetX: 1.sw, bottomBarOffset: 0.005.sh));
     }
   }
+
+  void updateServerIndex(int index) {
+    emit(state.copyWith(serverIndex: index));
+  }
 }

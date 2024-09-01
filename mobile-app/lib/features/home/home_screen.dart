@@ -1,10 +1,9 @@
+import 'package:discord/features/home/chat_room/chat_room.dart';
 import 'package:discord/features/home/components/home_body.dart';
 import 'package:discord/features/home/home_cubit.dart';
 import 'package:discord/features/home/home_state.dart';
-import 'package:discord/helpers/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../domain/stores/user_store.dart';
 import '../../main.dart';
@@ -37,43 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, state) {
               return GestureDetector(
                 onHorizontalDragUpdate: (details) {
-                  widget.cubit.onDragUpdate(details);
+                  homeCubit.onDragUpdate(details);
                 },
                 onHorizontalDragEnd: (details) {
-                  widget.cubit.onDragEnd();
+                  homeCubit.onDragEnd();
                 },
                 child: Stack(
                   children: [
-                    const HomeBody(),
-                    AnimatedPositioned(
-                      duration: const Duration(milliseconds: 150),
-                      top: 0,
-                      left: state.panelOffsetX,
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.sh,
-                        decoration: const BoxDecoration(
-                          color: AppColor.black1,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
-                          ),
-                        ),
-                        child: Center(
-                          child: Column(
-                            children: List.generate(15, (index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Panel Item $index + User is: ${user.email}',
-                                  style: const TextStyle(color: AppColor.white),
-                                ),
-                              );
-                            }),
-                          ),
-                        ),
-                      ),
-                    ),
+                    HomeBody(cubit: homeCubit),
+                    ChatRoom(cubit: homeCubit),
                   ],
                 ),
               );

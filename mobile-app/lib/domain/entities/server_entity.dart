@@ -1,3 +1,4 @@
+import '../../model/server_json.dart';
 import 'channel_entity.dart';
 import 'user_entity.dart';
 
@@ -17,4 +18,17 @@ class ServerEntity {
     required this.members,
     required this.channels,
   });
+
+  factory ServerEntity.empty() => ServerEntity(
+        id: '',
+        description: '',
+        image: '',
+        title: '',
+        members: [],
+        channels: [],
+      );
+
+  Map<String, dynamic> toServerJson() {
+    return ServerJson.copyWith(this).toJson();
+  }
 }

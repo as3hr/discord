@@ -47,6 +47,15 @@ class ServerJson {
         channels: serverEntity.channels,
       );
 
+  ServerEntity toDomain() => ServerEntity(
+        id: id,
+        description: description,
+        image: image,
+        title: title,
+        members: members,
+        channels: channels,
+      );
+
   Map<String, dynamic> toJson() {
     return {
       'title': title,

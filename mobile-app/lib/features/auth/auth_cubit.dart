@@ -27,9 +27,9 @@ class AuthCubit extends Cubit<AuthState> {
           },
           (user) => {
             emit(state.copyWith(isLoading: false)),
-            navigation.goToBottomBar(),
             if (context.mounted)
               {
+                navigation.goToBottomBar(),
                 showToast('Logged in successfully!', context),
               }
           },

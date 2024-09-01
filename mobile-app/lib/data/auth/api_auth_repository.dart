@@ -25,7 +25,7 @@ class ApiAuthRepository implements AuthRepository {
       return response.fold(
         (failure) => left(AuthFailure(error: failure.error)),
         (body) {
-          final user = UserJson.fromData(body['user']).toDomain();
+          final user = UserJson.fromData(body['result']).toDomain();
           _userStore.setUser(user);
           return right(user);
         },
